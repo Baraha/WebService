@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'backend_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cloudproject',
-        'USER': 'clouduser',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
+        'NAME': 'db',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': '192.168.1.6',
         'PORT': '5432',
 }
 }
