@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  api:
+    container_name: backend
+    build:
+      context: ./docker/api
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/backend_site/
+  database:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=db
+    ports:
+      - 5432:5432
