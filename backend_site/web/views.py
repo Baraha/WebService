@@ -1,6 +1,14 @@
 from django.shortcuts import render
-from django.http import  HttpResponse
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from .models import Car
+from .serializers import CarSerializer
 # Create your views here.
 
-def index(request):
-    return HttpResponse("Страница приложения")
+def CarView(APIView):
+
+    def get(self, request):
+        cars = Car.objects
+        serializer = CarSerializer(cars,many=True)
+        return Response(serializer.data)

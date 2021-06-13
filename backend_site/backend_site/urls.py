@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from django.conf import settings
+from django.conf.urls.static import static
 from web.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('web.urls')),
+    path('api_auth/', include('rest_framework.urls'))
 ]
+
+
+if settings.DEBUG:
+    urlpatterns+= static(settings.WEB_URL, document_root=settings.WEB_ROOT)
