@@ -18,5 +18,13 @@ class CarView(APIView):
         serializer = CarSerializer(instance=cars,many=True)
         resp = Response(serializer.data)
         if Response(serializer.data)==None:
-            resp = {"status" : "none"}
+            return Response(status=400)
         return resp
+
+    def post(self, request):
+        serializer = CarSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=201)
+        else:
+            return Response(status=400)
