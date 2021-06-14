@@ -15,7 +15,7 @@ class CarView(APIView):
 
     def get(self, request):
         cars = Car.objects.all()
-        serializer = CarSerializer(instance=cars,many=True)
+        serializer = CarSerializer(instance=cars, many=True)
         resp = Response(serializer.data)
         if Response(serializer.data)==None:
             return Response(status=400)
@@ -28,3 +28,11 @@ class CarView(APIView):
             return Response(status=201)
         else:
             return Response(status=400)
+        
+# class CarStatusFilter(APIView):
+#
+#     def get(self,status):
+#         cars = Car.objects.get(status_active=status,draft=False)
+#         serializer = CarSerializer(instance=cars, many=True)
+#         resp = Response(serializer.data)
+#         return resp
