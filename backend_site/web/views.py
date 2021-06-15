@@ -2,20 +2,20 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.http import HttpResponse
-import logging
+from loguru import logger
 from .models import Car
 from .serializers import CarSerializer
 from django.shortcuts import render
 
 # Create your views here.
 
-logger = logging.getLogger(__name__)
 
 class CarView(APIView):
 
     def get(self, request):
         cars = Car.objects.all()
         serializer = CarSerializer(instance=cars, many=True)
+        logger.debug(f"serializer LOGGER {serializer}")
         resp = Response(serializer.data)
         if Response(serializer.data)==None:
             return Response(status=400)
@@ -28,7 +28,8 @@ class CarView(APIView):
             return Response(status=201)
         else:
             return Response(status=400)
-        
+
+
 # class CarStatusFilter(APIView):
 #
 #     def get(self,status):
